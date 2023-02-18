@@ -3,7 +3,7 @@ using namespace std;
 
 enum ELevel {Undergraduate=1, Masters=2, Doctorate=3};
 enum Department {CS=1, CE=2, ES=3, ME=4, EE=5};
-enum std_grade {A=1, B=2, C=3, D=4, F=5};
+enum std_grade {A=1, B=2, C=3, D=4, F=5, U=6};
 
 struct address{
     string house;
@@ -274,7 +274,7 @@ struct Course{
     int EStudentsNo = 0;
     int DStudents[50] = {0};
     int DStudentsNo = 0;
-    Grade SGrades[50] = {F, 0};
+    Grade SGrades[50] = {U, 0};
     void inline EnterName(){
         cout<<"Enter course name: ";
         cin>>name;
@@ -324,12 +324,46 @@ struct Course{
     }
     void inline DropStudent(int RollNo){
         int index = FindStudent(RollNo);
-        DStudents[DStudentsNo]=EStudents[index];
-        for(int i=index; i<EStudentsNo; i++){
-            EStudents[i]=EStudents[i+1];
-            SGrades[i]=SGrades[i+1];
+        if(index!=-1){
+            DStudents[DStudentsNo]=EStudents[index];
+            for(int i=index; i<EStudentsNo; i++){
+                EStudents[i]=EStudents[i+1];
+                SGrades[i]=SGrades[i+1];
+            }
+            EStudentsNo--;
+            DStudentsNo++;
         }
-        EStudentsNo--;
-        DStudentsNo++;
+        else{
+            cout<<"This Student is not present in this course"<<endl;
+        }
+    }
+    void inline CourseDetails(){
+        char temp;
+        for(int i=0; i<EStudentsNo; i++){
+            cout<<"Student Roll No.: "<<EStudents[i];
+            if(SGrades[i].grade==U){
+                cout<<" Ungraded"<<endl;
+            }
+            else{
+                switch(SGrades[i].grade){
+                    case(A):
+                    temp = 'A';
+                    break;
+                    case(B):
+                    temp = 'B';
+                    break;
+                    case(C):
+                    temp = 'C';
+                    break;
+                    case(D):
+                    temp='D';
+                    break;
+                    case(F):
+                    temp = 'F';
+                    break;
+                }
+                cout<<" Grades: "<<temp<<"and Marks: "<<SGrades[i].marks<<endl;
+            }
+        }
     }
 };
