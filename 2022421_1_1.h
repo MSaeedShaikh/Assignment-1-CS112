@@ -80,6 +80,18 @@ struct Student{
     int roll_no;
     Person person;
     Department department;
+    string ECourses[10]={0};
+    int ENo;
+    string DCourses[10]={0};
+    int DNo;
+    int FindCourse(string code){
+        for(int i=0; i<ENo; i++){
+            if(code==ECourses[i]){
+                return i;
+            }
+        }
+        return -1;
+    }
     void inline EnterRollNo(){
         cout<<"Enter Roll No. of Student: ";
         cin>>roll_no;

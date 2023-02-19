@@ -3,7 +3,7 @@
 struct Course{
     string name;
     string code;
-    int TId;
+    int TId=0;
     int EStudents[50] = {0};
     int EStudentsNo = 0;
     int DStudents[50] = {0};
@@ -17,18 +17,13 @@ struct Course{
         cout<<"Enter course code: ";
         cin>>code;
     }
-    void inline EnterId(){
-        cout<<"Enter Teacher Id: ";
-        cin>>TId;
-    }
     void inline EnterCourse(){
         EnterName();
         EnterCode();
-        EnterId();
     }
     void inline EditCourse(){
         int temp;
-        cout<<"What would you like to change?(1 for Course Name, 2 for Course Code, 3 for Teacher Id): ";
+        cout<<"What would you like to change?(1 for Course Name, 2 for Course Code): ";
         cin>>temp;
         switch(temp){
             case(1):
@@ -37,14 +32,10 @@ struct Course{
             case(2):
             EnterCode();
             break;
-            case(3):
-            EnterId();
-            break;
         }
     }
-    void inline EnterStudent(){
-        cout<<"Enter student to be enrolled Roll no: ";
-        cin>>EStudents[EStudentsNo++];
+    void inline EnterStudent(int rollno){
+        EStudents[EStudentsNo++]=rollno;
     }
     int FindStudent(int RollNo){
         int x=0;
@@ -56,7 +47,7 @@ struct Course{
         }
         return -1;
     }
-    void inline DropStudent(int RollNo){
+    bool inline DropStudent(int RollNo){
         int index = FindStudent(RollNo);
         if(index!=-1){
             DStudents[DStudentsNo]=EStudents[index];
@@ -66,15 +57,53 @@ struct Course{
             }
             EStudentsNo--;
             DStudentsNo++;
+            return true;
         }
         else{
-            cout<<"This Student is not present in this course"<<endl;
+            cout<<"Student not in course"<<endl;
+            return false;
         }
     }
-    void inline EnterGrades(int RollNo){
-        int index = FindStudent(RollNo);
+    void inline EnterGrades(int rollno){
+        int index = FindStudent(rollno);
         SGrades[index].EnterGrade();
         SGrades[index].EnterMarks();
+    }
+    void inline StudentDetails(){
+        int index, RollNo;
+        string temp;
+        cout<<"Enter Roll No of Student: ";
+        cin>>RollNo;
+        index = FindStudent(RollNo);
+        if(index!=-1){
+            cout<<"Student Roll No.: "<<EStudents[index];
+            if(SGrades[index].grade==U){
+                cout<<" Ungraded"<<endl;
+            }
+            else{
+                switch(SGrades[index].grade){
+                    case(1):
+                    temp = 'A';
+                    break;
+                    case(2):
+                    temp = 'B';
+                    break;
+                    case(3):
+                    temp = 'C';
+                    break;
+                    case(4):
+                    temp='D';
+                    break;
+                    case(5):
+                    temp = 'F';
+                    break;
+                }
+                cout<<" Grades: "<<temp<<"and Marks: "<<SGrades[index].marks<<endl;
+            }
+        }
+        else{
+            cout<<"Student not in course"<<endl;
+        }
     }
     void inline CourseDetails(){
         char temp;
@@ -85,19 +114,19 @@ struct Course{
             }
             else{
                 switch(SGrades[i].grade){
-                    case(A):
+                    case(1):
                     temp = 'A';
                     break;
-                    case(B):
+                    case(2):
                     temp = 'B';
                     break;
-                    case(C):
+                    case(3):
                     temp = 'C';
                     break;
-                    case(D):
+                    case(4):
                     temp='D';
                     break;
-                    case(F):
+                    case(5):
                     temp = 'F';
                     break;
                 }
