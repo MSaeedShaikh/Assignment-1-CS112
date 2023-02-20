@@ -64,8 +64,7 @@ struct Course{
             return false;
         }
     }
-    void inline EnterGrades(int rollno){
-        int index = FindStudent(rollno);
+    void inline EnterGrades(int index){
         SGrades[index].EnterGrade();
         SGrades[index].EnterMarks();
     }
