@@ -118,7 +118,7 @@ void get_data(int i)
 	cin >> y;
 	rec_s[i].level = static_cast<education_level>(y);
 }
-void add_student()
+void new_student()
 {
 	cout << "Enter the number of students you want to enter (Upto 50): ";
 	cin >> ts;
@@ -153,7 +153,7 @@ void remove_student()
 	ts--;
 	cout << "Student has been successfully removed!" << endl;
 }
-void record_student()
+void student_display()
 {
 	for (int i = 0; i < ts; i++)
 	{
@@ -195,7 +195,7 @@ void student_unenroll_course(int i)
 	rec_s[i].num_course_registered--;
 	cout << "You have successfully unenrolled from " << rec_s[i].register_course[total_reg - 1] << "." << endl;
 }
-void unenroll_student()
+void student_unenroll()
 {
 	int regnum;
 	cout << "Enter your registration number: ";
@@ -225,7 +225,7 @@ void get_data_teacher(int i)
 	cin >> x;
 	rec_t[i].faculty = static_cast<Department>(x);
 }
-void add_teacher()
+void new_teacher()
 {
 	cout << "Enter the number of teachers you want to enter upto 50: ";
 	cin >> tt;
@@ -260,7 +260,7 @@ void remove_teacher()
 	tt--;
 	cout << "Teacher has been successfully removed!" << endl;
 }
-void update_teacher()
+void edit_teacher()
 {
 	cout << "Enter the employee number of teacher which you want to update: ";
 	string employee_num;
@@ -312,7 +312,7 @@ void update_teacher()
 		}
 	}
 }
-void record_teacher()
+void teacher_display()
 {
 	for (int i = 0; i < tt; i++)
 	{
@@ -326,7 +326,7 @@ void record_teacher()
 		cout << "Faculty: " << rec_t[i].faculty << endl;
 	}
 }
-void add_course() // As in CS-112
+void new_course() // As in CS-112
 {
 	cout << "How many courses you want to add: ";
 	cin >> tc;
@@ -363,7 +363,7 @@ void remove_course()
 	tc--;
 	cout << "Course has been successfully removed!" << endl;
 }
-void update_course()
+void edit_course()
 {
 	cout << "Enter the course name which you want to update (e.g. CS-112): ";
 	string coursename;
@@ -379,7 +379,7 @@ void update_course()
 	}
 	cout << "Course has been successfully updated!" << endl;
 }
-void record_course()
+void course_display()
 {
 	for (int i = 0; i < tc; i++)
 	{
@@ -387,7 +387,7 @@ void record_course()
 		cout << rec_c[i].course_name << " is taught by " << rec_c[i].course_teacher_name << "." << endl;
 	}
 }
-void allocate_teacher()
+void allocate_course()
 {
 	for (int i = 0; i < tc; i++)
 	{
@@ -395,7 +395,7 @@ void allocate_teacher()
 		cin >> rec_c[i].course_teacher_name;
 	}
 }
-void deallocate_teacher()
+void deallocate_course()
 {
 	string courseName;
 	cout << "Enter teacher's allocated coursename: ";
@@ -410,7 +410,7 @@ void deallocate_teacher()
 		}
 	}
 }
-void update_student()
+void edit_student()
 {
 	int regnum;
 	int x, y, choice;
@@ -499,7 +499,7 @@ void student_enroll_course(int i)
 	}
 	cout << "You have successfully enrolled in " << total_reg << " courses!" << endl;
 }
-void student_enroll()
+void enroll_course()
 {
 	// To register in any course the student must be registered in system, so ask reg number first
 	int regnum;
@@ -520,7 +520,7 @@ void student_enroll()
 		cout << "You are not enrolled in LMS!" << endl;
 	}
 }
-void student_grade()
+void student_final()
 {
 	int regnum;
 	cout << "Enter your registration number: ";
@@ -538,7 +538,7 @@ void student_grade()
 	}
 	cout << "Registration number " << regnum << " not found!" << endl;
 }
-void student_record()
+void student_courses()
 {
 	int regnum;
 	cout << "Enter your registration number: ";
@@ -587,7 +587,7 @@ void display_dropped_courses(int roll_no)
 		cout << "No records found for roll number " << roll_no << endl;
 	}
 }
-void dropped_course()
+void student_dcourses()
 {
 	int roll_num;
 	cout << "Enter your registration number: ";
@@ -622,7 +622,7 @@ void display_completed_courses(int roll_no)
 		cout << "No records found for roll number " << roll_no << endl;
 	}
 }
-void completed_course()
+void student_ccourses()
 {
 	int roll_no;
 	cout << "Enter your registration number: ";
@@ -650,7 +650,7 @@ void teacher_list()
 		}
 	}
 }
-void teacher_record()
+void teacher_details()
 {
 	string employee_num;
 	cout << "Enter employee number: ";
@@ -673,7 +673,7 @@ void teacher_record()
 		}
 	}
 }
-void list_teacher_courses()
+void teacher_courses()
 {
 	string course_teacher_name;
 	cout << "Enter your name please: ";
@@ -709,14 +709,14 @@ void enrolled_students_list(string coursename)
 		cout << "No students enrolled in " << coursename << "." << endl;
 	}
 }
-void enrolled_students()
+void students_in_course()
 {
 	string coursename;
 	cout << "Enter the specific coursename: ";
 	cin >> coursename;
 	enrolled_students_list(coursename);
 }
-void teacher_allocate_grade() // This function allows a teacher to allocate grade to each student for his/her course only
+void allocate_grade() // This function allows a teacher to allocate grade to each student for his/her course only
 {
 	string cname;
 	cout << "Enter course name: ";
@@ -780,7 +780,7 @@ void teacher_allocate_grade() // This function allows a teacher to allocate grad
 		}
 	}
 }
-void top_student()
+void top_in_course()
 {
 	string coursename, studentname;
 	int max = 0;
@@ -825,7 +825,7 @@ void top_student()
 	}
 	cout << "Course " << coursename << " does not exist" << endl;
 }
-void gradewise_division()
+void grades_in_course()
 {
 	string cname;
 	cout << "Enter course name: ";
@@ -913,7 +913,7 @@ void admin_call()
 	cout << "Add Student - Press 1: " << endl;
 	cout << "Remove a student from system - Press 2: " << endl;
 	cout << "Check record of all students - Press 3: " << endl;
-	cout << "Unroll a student from a course - Press 4: " << endl;
+	cout << "Un-enroll a student from a course - Press 4: " << endl;
 	cout << "Add a new teacher in system - Press 5: " << endl;
 	cout << "Remove a teacher from system - Press 6: " << endl;
 	cout << "Update teacher detail - Press 7: " << endl;
@@ -931,49 +931,49 @@ void admin_call()
 	switch (choice)
 	{
 	case 1:
-		add_student();
+		new_student();
 		break;
 	case 2:
 		remove_student();
 		break;
 	case 3:
-		record_student();
+		student_display();
 		break;
 	case 4:
-		unenroll_student();
+		student_unenroll();
 		break;
 	case 5:
-		add_teacher();
+		new_teacher();
 		break;
 	case 6:
 		remove_teacher();
 		break;
 	case 7:
-		update_teacher();
+		edit_teacher();
 		break;
 	case 8:
-		record_teacher();
+		teacher_display();
 		break;
 	case 9:
-		add_course();
+		new_course();
 		break;
 	case 10:
 		remove_course();
 		break;
 	case 11:
-		update_course();
+		edit_course();
 		break;
 	case 12:
-		record_course();
+		course_display();
 		break;
 	case 13:
-		allocate_teacher(); 
+		allocate_course(); 
 		break;
 	case 14:
-		deallocate_teacher();
+		deallocate_course();
 		break;
 	case 15:
-		update_student();
+		edit_student();
 		break;
 	default:
 		cout << "Enter a valid choice!" << endl;
@@ -1001,22 +1001,22 @@ void student_call()
 		student_details();
 		break;
 	case 2:
-		student_enroll();
+		enroll_course();
 		break;
 	case 3:
-		student_grade();
+		student_final();
 		break;
 	case 4:
 		teacher_list();
 		break;
 	case 5:
-		student_record();
+		student_courses();
 		break;
 	case 6:
-		dropped_course();
+		student_dcourses();
 		break;
 	case 7:
-		completed_course();
+		student_ccourses();
 		break;
 	default:
 		cout << "Enter a valid choice!" << endl;
@@ -1040,22 +1040,22 @@ void teacher_call()
 	switch (choice)
 	{
 	case 1:
-		teacher_record();
+		teacher_details();
 		break;
 	case 2:
-		list_teacher_courses();
+		teacher_courses();
 		break;
 	case 3:
-		enrolled_students();
+		students_in_course();
 		break;
 	case 4:
-		teacher_allocate_grade();
+		allocate_grade();
 		break;
 	case 5:
-		top_student();
+		top_in_course();
 		break;
 	case 6:
-		gradewise_division();
+		grades_in_course();
 		break;
 	default:
 		cout << "Enter a valid choice!" << endl;
